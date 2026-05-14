@@ -181,11 +181,11 @@ MonoBehaviour:
 
 
     Interact
-    - E
+    - Hold E
 
     Sprint - Shift
 
-    Jump/Fly - Space'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7caa0d31562c289459a775656d82c29b, type: 2}
   m_sharedMaterial: {fileID: 1177129385181759355, guid: 7caa0d31562c289459a775656d82c29b, type: 2}

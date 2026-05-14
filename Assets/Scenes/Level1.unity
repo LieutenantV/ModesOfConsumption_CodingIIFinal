@@ -1072,7 +1072,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 0
+          m_StringArgument: TitleScreen
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &263392572
@@ -1765,7 +1765,7 @@ Transform:
   m_GameObject: {fileID: 788513604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 125.7, y: 0, z: 95.8}
+  m_LocalPosition: {x: 149.7, y: 0, z: 95.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2486,11 +2486,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
   objSpawnPrefabs:
   - {fileID: 4119261117011632301, guid: 28d6d3ec79bcf4e40ae50efd227d2e1b, type: 3}
-  numToSpawn: 25
-  minDistanceBetweenObj: 10
+  numToSpawn: 45
+  minDistanceBetweenObj: 5
   spawnHeightY: 0
   culTarget: {fileID: 1405074143}
-  hideSpawnedObjDistance: 30
+  hideSpawnedObjDistance: 15
 --- !u!65 &1387542690
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2510,8 +2510,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 140, y: 7.2610474, z: 140}
-  m_Center: {x: -25.233345, y: 3.1305237, z: -27.780334}
+  m_Size: {x: 125, y: 3, z: 125}
+  m_Center: {x: -25, y: 3.1305237, z: -25}
 --- !u!4 &1387542691
 Transform:
   m_ObjectHideFlags: 0
@@ -2633,7 +2633,7 @@ Transform:
   m_GameObject: {fileID: 1405074142}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 75, y: -0.56200004, z: 75}
+  m_LocalPosition: {x: 75, y: 0.502, z: 75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3256,7 +3256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1147802162ec6547bb350ed40ef17ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VictoryScreenManager
-  pointsRequiredToWin: 100
+  pointsRequiredToWin: 150
   victoryPanel: {fileID: 1803116496}
   pointsDisplay: {fileID: 55531312}
   nextLevelButtonText: {fileID: 1030173114}
