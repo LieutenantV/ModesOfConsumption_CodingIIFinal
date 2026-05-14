@@ -10,7 +10,7 @@ public class PointsManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern - ensures only one PointsManager exists
+        // Makes sures theres only one point manager at a time
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

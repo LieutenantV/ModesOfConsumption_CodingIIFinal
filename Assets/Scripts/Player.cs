@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         reticleImage = GameObject.Find("Reticle").GetComponent<Image>();
         reticleImage.color = new Color(0, 0, 0, .7f);
 
-        pauseMenu = GameObject.Find("PauseMenu").GetComponent<PauseMenu>();
+        //pauseMenu = GameObject.Find("PauseMenu").GetComponent<PauseMenu>();
     }
 
     void Update()

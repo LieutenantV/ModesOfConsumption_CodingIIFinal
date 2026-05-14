@@ -9,10 +9,10 @@ public class FoodPickup : Interactable
 
     public override void Interact(Player player)
     {
-        Debug.Log("interacting food pickup");
+        //Debug.Log("interacting food pickup");
         UpHunger();
         GainPoints();
-        Debug.Log("Called up hunger");
+        //Debug.Log("Called up hunger");
     }
 
     public void UpHunger()
@@ -20,7 +20,7 @@ public class FoodPickup : Interactable
         hungerbar = FindAnyObjectByType<Hungerbar>();
         hungerbar.hunger += 30f;
         Destroy(gameObject);
-        Debug.Log("destroyed");
+        //Debug.Log("destroyed");
     }
 
     public void GainPoints()
