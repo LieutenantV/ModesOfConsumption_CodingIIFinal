@@ -72,27 +72,27 @@ public class RoamingNPC : MonoBehaviour
 
     // handles movement and npc checkpoints
     private void HandleMovement()
+{
+    destinationCheckTimer -= Time.deltaTime;
+
+    // Checks to see if the npc has reached a destination
+    if (destinationCheckTimer <= 0)
     {
-        destinationCheckTimer -= Time.deltaTime;
+        destinationCheckTimer = destinationCheckInterval;
 
-        // Checks to see if the npc has reached a destination
-        if (destinationCheckTimer <= 0)
+        if (!navMeshAgent.hasPath || navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
-            destinationCheckTimer = destinationCheckInterval;
-
-            if (!navMeshAgent.hasPath || navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f)
             {
-                if (!navMeshAgent.hasPath || !navMeshAgent.velocity.sqrMagnitude > 0.2f * 0.2f)
-                {
-                    // Start waiting at destination
-                    isWaiting = true;
-                    waitTimer = Random.Range(minWaitTime, maxWaitTime);
-                }
+                // Start waiting at destination
+                isWaiting = true;
+                waitTimer = Random.Range(minWaitTime, maxWaitTime);
             }
         }
-
-        AvoidObstacles();
     }
+
+    AvoidObstacles();
+}
 
     // Sets a new random destination within a range
     private void SetNewDestination()

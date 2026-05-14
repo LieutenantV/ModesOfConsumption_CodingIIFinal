@@ -19,7 +19,7 @@ public class CullObject : MonoBehaviour
 
         if (culTarget == null)
         {
-            Debug.LogWarning("No culling target specified for " + gameObject + "!");
+            //Debug.LogWarning("No culling target specified for " + gameObject + "!");
         }
     }
 
