@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class FoodPickup : Interactable
 {
-
     private Hungerbar hungerbar;
 
     public override void Interact(Player player)
     {
         Debug.Log("interacting food pickup");
         UpHunger();
+        GainPoints();
         Debug.Log("Called up hunger");
     }
-
 
     public void UpHunger()
     {
@@ -24,4 +23,8 @@ public class FoodPickup : Interactable
         Debug.Log("destroyed");
     }
 
+    public void GainPoints()
+    {
+        PointsManager.Instance.AddPoints(PointsManager.Instance.pointsPerFood);
+    }
 }
