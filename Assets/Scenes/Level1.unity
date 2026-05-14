@@ -514,8 +514,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 242530663}
   - {fileID: 1536130845}
+  - {fileID: 242530663}
   - {fileID: 1491150875}
   m_Father: {fileID: 645396041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2510,8 +2510,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 150.4976, y: 7.2610474, z: 149.79123}
-  m_Center: {x: -24.751198, y: 3.1305237, z: -25.104385}
+  m_Size: {x: 140, y: 7.2610474, z: 140}
+  m_Center: {x: -25.233345, y: 3.1305237, z: -27.780334}
 --- !u!4 &1387542691
 Transform:
   m_ObjectHideFlags: 0
