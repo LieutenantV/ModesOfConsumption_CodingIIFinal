@@ -45,16 +45,16 @@ public class ObjectSpawner : MonoBehaviour
 
             if (!IsObjectTooClose(rndPosWithin))
             {
-                GameObject spawnedObject = Instantiate(objSpawnPrefabs[Random.Range(0, objSpawnPrefabs.Length)], rndPosWithin, Quaternion.identity);
-                CurrentSpawnedObj[i] = spawnedObject;
-                CurrentSpawnedObj[i].transform.parent = transform;
-
-                GameObject cullingSphere = new GameObject("Culling Sphere");
+               GameObject cullingSphere = new GameObject("Culling Sphere");
                 cullingSphere.transform.position = rndPosWithin;
-                cullingSphere.transform.parent = spawnedObject.transform;
+                GameObject spawnedObject = Instantiate(objSpawnPrefabs[Random.Range(0, objSpawnPrefabs.Length)], rndPosWithin, Quaternion.identity);
 
                 SphereCollider spawnCollider = cullingSphere.AddComponent<SphereCollider>();
                 spawnCollider.radius = hideSpawnedObjDistance;
+                spawnCollider.isTrigger = true;
+
+                // ADD THIS LINE - Put it on "Ignore Raycast" layer so it doesn't block raycasts
+                cullingSphere.layer = LayerMask.NameToLayer("Ignore Raycast");
 
                 CullObject spawnCuller = cullingSphere.AddComponent<CullObject>();
                 spawnCuller.culTarget = culTarget;

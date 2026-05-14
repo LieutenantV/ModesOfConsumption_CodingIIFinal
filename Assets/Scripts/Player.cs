@@ -79,43 +79,45 @@ public class Player : MonoBehaviour
     }
 
     private void HandleMovement()
-{
-    bool grounded = cc.isGrounded;
-
-    // Apply gravity every frame
-    verticalVelocity += gravity * Time.deltaTime;
-
-    // Reset velocity when grounded to prevent velocity accumulation
-    if (grounded && verticalVelocity < 0)
     {
-        verticalVelocity = -2f; // Small downward force to keep grounded
+        bool grounded = cc.isGrounded;
+
+        // Apply gravity every frame
+        verticalVelocity += gravity * Time.deltaTime;
+
+        // Reset velocity when grounded to prevent velocity accumulation
+        if (grounded && verticalVelocity < 0)
+        {
+            verticalVelocity = -2f; // Small downward force to keep grounded
+        }
+
+        float currentSpeed = isRunning ? runSpeed : walkSpeed;
+
+        Vector3 move = transform.right * moveInput.x * currentSpeed + transform.forward * moveInput.y * currentSpeed;
+
+        // Jump logic - only jump if grounded
+        if (isJumping && grounded)
+        {
+            verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            isJumping = false; // Reset immediately after jumping
+        }
+
+        Vector3 velocity = Vector3.up * verticalVelocity;
+        cc.Move((move + velocity) * Time.deltaTime);
     }
-
-    float currentSpeed = isRunning ? runSpeed : walkSpeed;
-
-    Vector3 move = transform.right * moveInput.x * currentSpeed + transform.forward * moveInput.y * currentSpeed;
-
-    // Jump logic - only jump if grounded
-    if (isJumping && grounded)
-    {
-        verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        isJumping = false; // Reset immediately after jumping
-    }
-
-    Vector3 velocity = Vector3.up * verticalVelocity;
-    cc.Move((move + velocity) * Time.deltaTime);
-}
 
     void CheckInteract()
     {
         if (reticleImage != null) reticleImage.color = new Color(0, 0, 0, .7f);
+        
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-        //RaycastHit hit;
-        // bool didHit = Physics.Raycast(ray, out hit, 3);
-        //if (!didHit) return;
-        if (Physics.Raycast(ray, out RaycastHit hit, 3f))
+        
+        // This raycast will skip colliders on the "Ignore Raycast" layer
+        if (Physics.Raycast(ray, out RaycastHit hit, 3f, ~LayerMask.GetMask("Ignore Raycast")))
         {
-            currentInteractable = hit.collider.GetComponentInParent<Interactable>();
+            currentInteractable = hit.collider.GetComponent<Interactable>() 
+                ?? hit.collider.GetComponentInParent<Interactable>();
+                
             if (currentInteractable != null && reticleImage != null)
             {
                 reticleImage.color = Color.red;
@@ -126,33 +128,39 @@ public class Player : MonoBehaviour
                 Debug.DrawRay(cameraTransform.position, cameraTransform.forward * 3, Color.blue);
             }
         }
-
-
+        else
+        {
+            currentInteractable = null;
+        }
     }
-
     void HandleInteract()
     {
         if (!interactPressed) return;
-        interactPressed = false;
-        if (currentInteractable == null) return;
-        currentInteractable.Interact(this);
+    interactPressed = false;
+    if (currentInteractable == null) 
+    {
+        //Debug.Log("currentInteractable is NULL");
+        return;
+    }
+    //Debug.Log("Calling Interact on: " + currentInteractable.gameObject.name);
+    currentInteractable.Interact(this);
     }
 
     private void HandlePause()
-{
-    isPaused = !isPaused;
-    
-    if (isPaused)
     {
-        Time.timeScale = 0f; // Freeze the game
-        pauseMenu.Pause();
+        isPaused = !isPaused;
+        
+        if (isPaused)
+        {
+            Time.timeScale = 0f; // Freeze the game
+            pauseMenu.Pause();
+        }
+        else
+        {
+            Time.timeScale = 1f; // Resume the game
+            pauseMenu.Resume();
+        }
     }
-    else
-    {
-        Time.timeScale = 1f; // Resume the game
-        pauseMenu.Resume();
-    }
-}
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -177,16 +185,16 @@ public class Player : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed) interactPressed = true;
-        //Debug.Log("OnInteract fired. performed=" + context.performed);
+        Debug.Log("OnInteract fired. performed=" + context.performed);
     }
 
     public void OnPause(InputAction.CallbackContext context)
-{
-    if (context.performed)
     {
-        HandlePause();
+        if (context.performed)
+        {
+            HandlePause();
+        }
     }
-}
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
